@@ -1,0 +1,26 @@
+<?php /* Template Name: Category */ ?>
+
+<?php get_header(); ?>    
+
+<!-- TITLE -->
+<section class="py-5">
+	<div class="container container-800">
+		<h1 class="text-center"><?php the_title(); ?></h1>
+		<?php the_content(); ?>
+	</div>
+</section>
+
+<!-- PARENT CATEGORIES AND POSTS --> 
+<section class="pb-5">
+	<div class="container container-800 min-height">
+		<?php $cat = get_the_category();
+		$args = array('orderby' => 'id', 'parent' => $cat[0]->category_parent );
+		$cats = get_categories($args);
+		foreach ($cats as $cat){ $cat_id= $cat->term_id; ?>
+		<li><h2><a href="/category/<?php echo $cat->slug; ?>/" class="body-text"><?php echo $cat->name; ?></a></h2>	</li>
+		
+		<?php } ?>
+	</div>
+</section>
+
+<?php get_footer(); ?>
